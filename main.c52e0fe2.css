@@ -24,7 +24,7 @@ body {
 }
 
 .o-page-wrap {
-	background: linear-gradient( transparent, black );
+	/* background: linear-gradient( transparent, black ); */
 }
 
 @media (min-width: 700px) {
@@ -49,6 +49,80 @@ body {
 	width: 100vw;
 	height: 100vh;
 	z-index: -1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+body {
+  --w: 100%;
+  --h: 100%;
+  min-height: 100vh;
+  background: #333;
+  position: relative;
+}
+
+.o-page-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: var(--w);
+  height: var(--h);
+  background: linear-gradient(60deg, #d4af09, #8a096a);
+}
+
+.o-page-bg:before,
+.o-page-bg:after {
+  --linew: 0.2vw;
+  --unit: 10vw;
+  --p: 0;
+  --s: calc(1 - 2 * var(--p));
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+}
+.o-page-bg:after {
+  --p: 1;
+}
+.o-page-bg:nth-child(1):before,
+.o-page-bg:nth-child(1):after {
+  background: linear-gradient(
+	  calc(var(--s) * 45deg),
+	  transparent calc(50% - var(--linew)),
+	  #111 0,
+	  #111 calc(50% + var(--linew)),
+	  transparent 0
+	)
+	calc(var(--unit) / 2) var(--unit) / var(--unit) var(--unit);
+
+  --mask: linear-gradient(red 25%, #ffffff00 35%, #ffffff00 65%, red 75%) 0 0 /
+	calc(var(--unit) / 2) calc(var(--unit) / 2);
+}
+
+@media screen and (min-width: 768px) {
+  .o-page-bg:before,
+  .o-page-bg:after {
+	--linew: 0.1vw;
+	--unit: 5vw;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .o-page-bg:before,
+  .o-page-bg:after {
+	--linew: 0.02vw;
+	--unit: 1vw;
+  }
 }
 
 
