@@ -40510,11 +40510,11 @@ var index = {
 };
 var _default = index;
 exports.default = _default;
-},{}],"skull/scene-processed.glb":[function(require,module,exports) {
-module.exports = "./scene-processed.e72cf8b9.glb";
-},{}],"texture.png":[function(require,module,exports) {
-module.exports = "./texture.12166c78.png";
-},{}],"node_modules/gsap/gsap-core.js":[function(require,module,exports) {
+},{}],"./lowpolyzeko/lowpz-processed.glb":[function(require,module,exports) {
+module.exports = "/lowpz-processed.50d77bf4.glb";
+},{}],"./texture.png":[function(require,module,exports) {
+module.exports = "/texture.12166c78.png";
+},{}],"./node_modules/gsap/gsap-core.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -47025,7 +47025,7 @@ var _vertex = _interopRequireDefault(require("./shader/vertex.glsl"));
 
 var dat = _interopRequireWildcard(require("dat.gui"));
 
-var _sceneProcessed = _interopRequireDefault(require("./skull/scene-processed.glb"));
+var _lowpzProcessed = _interopRequireDefault(require("./lowpolyzeko/lowpz-processed.glb"));
 
 var _texture = _interopRequireDefault(require("./texture.png"));
 
@@ -47068,12 +47068,17 @@ function () {
     this.width = this.container.offsetWidth;
     this.height = this.container.offsetHeight;
     this.container.appendChild(this.renderer.domElement);
-    this.camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.001, 1000); // var frustumSize = 10;
+    this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.001, 1000); // var frustumSize = 10;
     // var aspect = window.innerWidth / window.innerHeight;
     // this.camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, -1000, 1000 );
+    // this.camera.position.set(5, 0, 7);
 
-    this.camera.position.set(5, 0, 7);
-    this.camera.rotation.y = 0.66; // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    if (window.innerWidth > 699) {
+      this.camera.rotation.y = 3.14 / 6;
+    } else {
+      this.camera.rotation.y = 3.14 / 9;
+    } // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+
 
     this.time = 0;
     this.isPlaying = true;
@@ -47083,19 +47088,44 @@ function () {
     this.setupResize(); // this.settings();
 
     this.loader = new _GLTFLoader.GLTFLoader();
-    this.loader.load(_sceneProcessed.default, function (gltf) {
+    this.loader.load(_lowpzProcessed.default, function (gltf) {
+      _this.scene.translateX(-2);
+
+      _this.scene.translateY(1);
+
+      _this.scene.translateZ(-2);
+
       _this.scene.add(gltf.scene);
 
       gltf.scene.traverse(function (o) {
         if (o.isMesh) {
-          // o.position.x = 2;
-          // o.position.y = 0.5;
+          var onMouseMove = function onMouseMove(event) {
+            // calculate mouse position in normalized device coordinates
+            // (-1 to +1) for both components
+            that.mouse.x = event.clientX / window.innerWidth * 2 - 1;
+            that.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1; // console.log(that.mouse);
+
+            o.rotation.x = that.mouse.x / 2;
+            o.rotation.y = that.mouse.y / -2; // that.material.uniforms.mouse.value = that.mouse;
+          }; // window.addEventListener( 'mousemove', onMouseMove, false );
+
+
+          // o.position.x = 3;
+          // o.position.y = 2;
+          // o.position.z = -5;
+          o.rotation.x = 3.14 * 2 / 6;
+          o.translateZ(-2);
+          o.translateY(-4);
+          o.rotation.y = pageYOffset / document.body.scrollHeight * 3.14 * 3; // o.rotation.z = pageYOffset / document.body.scrollHeight * 3.14 * 15;
+
           o.scale.set(1, 1, 1);
           o.material = _this.material;
           window.addEventListener("wheel", function (e) {
             // console.log("scrolled", pageYOffset)
-            o.rotation.y = pageYOffset * 3.14 / 1000;
+            o.rotation.y = pageYOffset / document.body.scrollHeight * 3.14 * 3; // o.rotation.z = pageYOffset / document.body.scrollHeight * 3.14 * 15;
           }, true);
+          _this.mouse = new THREE.Vector2();
+          var that = _this;
         }
       });
     });
@@ -47184,8 +47214,9 @@ function () {
         vertexShader: _vertex.default,
         fragmentShader: _fragment.default
       });
-      this.geometry = new THREE.PlaneGeometry(100, 100, 1, 1);
-      this.plane = new THREE.Mesh(this.geometry, this.material); // this.scene.add(this.plane);
+      this.geometry = new THREE.PlaneGeometry(100, 100, 1, 1); // this.plane = new THREE.Mesh(this.geometry, this.material);
+      // this.plane = new THREE.Mesh(this.geometry, new THREE.MeshBasicMaterial());
+      // this.scene.add(this.plane);
     }
   }, {
     key: "stop",
@@ -47213,7 +47244,7 @@ function () {
 }();
 
 exports.default = Sketch;
-},{"three":"node_modules/three/build/three.module.js","three/examples/jsm/loaders/GLTFLoader.js":"node_modules/three/examples/jsm/loaders/GLTFLoader.js","./shader/fragment.glsl":"shader/fragment.glsl","./shader/vertex.glsl":"shader/vertex.glsl","dat.gui":"node_modules/dat.gui/build/dat.gui.module.js","./skull/scene-processed.glb":"skull/scene-processed.glb","./texture.png":"texture.png","gsap":"node_modules/gsap/index.js","three-orbit-controls":"node_modules/three-orbit-controls/index.js"}],"app.js":[function(require,module,exports) {
+},{"three":"node_modules/three/build/three.module.js","three/examples/jsm/loaders/GLTFLoader.js":"node_modules/three/examples/jsm/loaders/GLTFLoader.js","./shader/fragment.glsl":"shader/fragment.glsl","./shader/vertex.glsl":"shader/vertex.glsl","dat.gui":"node_modules/dat.gui/build/dat.gui.module.js","./lowpolyzeko/lowpz-processed.glb":"lowpolyzeko/lowpz-processed.glb","./texture.png":"texture.png","gsap":"node_modules/gsap/index.js","three-orbit-controls":"node_modules/three-orbit-controls/index.js"}],"app.js":[function(require,module,exports) {
 "use strict";
 
 var _module = _interopRequireDefault(require("./module"));
@@ -47253,7 +47284,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57511" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64312" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
