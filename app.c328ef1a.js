@@ -40510,11 +40510,11 @@ var index = {
 };
 var _default = index;
 exports.default = _default;
-},{}],"../lowpolyzeko/lowpz-processed.glb":[function(require,module,exports) {
-module.exports = "/lowpz-processed.50d77bf4.glb";
-},{}],"../texture.png":[function(require,module,exports) {
-module.exports = "/texture.12166c78.png";
-},{}],"../node_modules/gsap/gsap-core.js":[function(require,module,exports) {
+},{}],"lowpolyzeko/lowpz-processed.glb":[function(require,module,exports) {
+module.exports = "./lowpz-processed.50d77bf4.glb";
+},{}],"texture.png":[function(require,module,exports) {
+module.exports = "./texture.12166c78.png";
+},{}],"node_modules/gsap/gsap-core.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
