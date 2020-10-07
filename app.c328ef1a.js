@@ -40511,9 +40511,9 @@ var index = {
 var _default = index;
 exports.default = _default;
 },{}],"skull/scene-processed.glb":[function(require,module,exports) {
-module.exports = "scene-processed.e72cf8b9.glb";
+module.exports = "./scene-processed.e72cf8b9.glb";
 },{}],"texture.png":[function(require,module,exports) {
-module.exports = "texture.12166c78.png";
+module.exports = "./texture.12166c78.png";
 },{}],"node_modules/gsap/gsap-core.js":[function(require,module,exports) {
 "use strict";
 
